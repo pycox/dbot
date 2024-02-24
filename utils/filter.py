@@ -24,32 +24,6 @@ def fetchJobs():
     return [cell.value.lower() for cell in ws['D']]
 
 
-def updateDB(arr):
-    if os.path.exists(dbXlDir):
-        wb = load_workbook(dbXlDir)
-    else:
-        wb = Workbook()
-
-    if wb.active:
-        ws = wb.active
-    else:
-        ws = wb.create_sheet()
-        
-    if ws["A1"] != "Job Title":
-        ws["A1"] = "Job Title"
-        ws["B1"] = "Company"
-        ws["C1"] = "Location"
-        ws["D1"] = "Url"
-    
-    for item in arr:
-        for job in fetchJobs():
-            if (job in item[0].lower()):
-                ws.append(item)
-                break
-
-    wb.save(dbXlDir)
-    
-
 def readHistory(key=None):
     with open(histDir, 'r') as file:
         try:
@@ -65,10 +39,48 @@ def readHistory(key=None):
         
 def updateHistory(key, val):
     data = readHistory()
-    data[key] = val
+    data[f'{key}'] = val
     
     with open(histDir, 'w') as file:
         try:
             json.dump(data, file, indent=4)
         except Exception as e:
             print(e)
+
+
+def updateDB(key, arr):
+    if os.path.exists(dbXlDir):
+        wb = load_workbook(dbXlDir)
+    else:
+        wb = Workbook()
+
+    if wb.active:
+        ws = wb.active
+    else:
+        ws = wb.create_sheet()
+        
+    if ws["A1"] != "Job Title":
+        ws["A1"] = "Job Title"
+        ws["B1"] = "Company"
+        ws["C1"] = "Location"
+        ws["D1"] = "Url"
+        
+    hist = readHistory(key)
+    newHist = []
+    
+    for item in arr:
+        title, _, _, link = item
+        
+        newHist.append(link)
+        
+        if not link in hist:
+        
+            for job in fetchJobs():    
+                if (job in title.lower()):
+                    ws.append(item)
+                    break
+        
+    updateHistory(key, newHist)
+
+    wb.save(dbXlDir)
+    
