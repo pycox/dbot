@@ -4,8 +4,9 @@
 # from scripts.scraper4 import main as _4       
 # from scripts.scraper5 import main as _5       
 # from scripts.scraper6 import main as _6       
-from scripts.scraper7 import main as _7       
-from scripts.scraper8 import main as _8       
+# from scripts.scraper7 import main as _7       
+# from scripts.scraper8 import main as _8       
+from scripts.scraper9 import main as _9       
 
 
 def run():
@@ -30,8 +31,11 @@ def run():
     # try: _7() 
     # except Exception as e: print(f'Scraper7: {e}')
     
-    try: _8() 
-    except Exception as e: print(f'Scraper8: {e}')
+    # try: _8() 
+    # except Exception as e: print(f'Scraper8: {e}')
+    
+    try: _9() 
+    except Exception as e: print(f'Scraper9: {e}')
     
     
 if __name__ == "__main__":
