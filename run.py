@@ -5,6 +5,7 @@
 # from scripts.scraper5 import main as _5       
 # from scripts.scraper6 import main as _6       
 from scripts.scraper7 import main as _7       
+from scripts.scraper8 import main as _8       
 
 
 def run():
@@ -26,8 +27,11 @@ def run():
     # try: _6() 
     # except Exception as e: print(f'Scraper6: {e}')
     
-    try: _7() 
-    except Exception as e: print(f'Scraper7: {e}')
+    # try: _7() 
+    # except Exception as e: print(f'Scraper7: {e}')
+    
+    try: _8() 
+    except Exception as e: print(f'Scraper8: {e}')
     
     
 if __name__ == "__main__":
