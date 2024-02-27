@@ -20,7 +20,7 @@ def main():
         title = item.select_one("h3").text.strip() if item.select_one("h3") else ""
         location = "London" 
         
-        data.append([title, com, location, link])
+        data.append([title, com, location, f'https://www.kfh.co.uk{link}'])
                 
     updateDB(key, data)
 

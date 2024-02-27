@@ -28,7 +28,7 @@ def main():
                 item.find_element(By.CSS_SELECTOR, 'a').text.strip(),
                 com,
                 "United Kindom",
-                link
+                f'https://www.admiraljobs.co.uk{link}'
             ])
                 
     updateDB(key, data)
