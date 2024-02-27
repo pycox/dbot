@@ -18,7 +18,8 @@
 # from scripts.scraper18 import main as _18       
 # from scripts.scraper19 import main as _19       
 # from scripts.scraper20 import main as _20       
-from scripts.scraper21 import main as _21       
+# from scripts.scraper21 import main as _21       
+from scripts.scraper22 import main as _22       
 
 
 def run():
@@ -79,8 +80,11 @@ def run():
     # try: _20() 
     # except Exception as e: print(f'Scraper20: {e}')
     
-    try: _21() 
-    except Exception as e: print(f'Scraper21: {e}')
+    # try: _21() 
+    # except Exception as e: print(f'Scraper21: {e}')
+    
+    try: _22() 
+    except Exception as e: print(f'Scraper22: {e}')
     
     
 if __name__ == "__main__":
