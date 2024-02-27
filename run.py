@@ -13,7 +13,8 @@
 # from scripts.scraper13 import main as _13       
 # from scripts.scraper14 import main as _14           # Not completed! (job is not exist)     
 # from scripts.scraper15 import main as _15       
-from scripts.scraper16 import main as _16       
+# from scripts.scraper16 import main as _16       
+from scripts.scraper17 import main as _17       
 
 
 def run():
@@ -62,9 +63,11 @@ def run():
     # try: _15() 
     # except Exception as e: print(f'Scraper15: {e}')
     
-    try: _16() 
-    except Exception as e: print(f'Scraper16: {e}')
+    # try: _16() 
+    # except Exception as e: print(f'Scraper16: {e}')
     
+    try: _17() 
+    except Exception as e: print(f'Scraper17: {e}')
     
 if __name__ == "__main__":
     run()
