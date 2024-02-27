@@ -6,7 +6,7 @@ import time
 
 
 def main():
-    key = 20
+    key = 21
     com, url = readUrl(key)
     options = Options()
     options.add_argument("--log-level=3")
@@ -16,33 +16,25 @@ def main():
     time.sleep(4)
     
     try:
-        driver.find_element(By.CSS_SELECTOR, 'button#hs-eu-confirmation-button').click()
+        driver.find_element(By.CSS_SELECTOR, 'button.iubenda-cs-accept-btn').click()
     except Exception as e:
         print(f'Scraper{key} cookiee button: {e}')
         
     time.sleep(4)
     
-    iframe = driver.find_element(By.TAG_NAME, "iframe")
-    driver.switch_to.frame(iframe)
-    
-    items = driver.find_elements(By.CSS_SELECTOR, 'div.opening')
+    items = driver.find_elements(By.CSS_SELECTOR, 'div.JobRoles_job')
     
     data = []
     
     for item in items:
         link = item.find_element(By.CSS_SELECTOR, 'a').get_attribute("href").strip()
-        location = item.find_element(By.CSS_SELECTOR, "span").text.strip()
         
-        for str in ['London', 'New York', 'San Francisco', 'United States', 'United Kingdom']:
-            if (str in location):
-                data.append([
-                    item.find_element(By.CSS_SELECTOR, 'a').text.strip(),
-                    com,
-                    location,
-                    link
-                ])
-                
-                break
+        data.append([
+            item.find_element(By.CSS_SELECTOR, 'div.JobRoles_jobTitle').text.strip(),
+            com,
+            "United Kindom",
+            link
+        ])
                 
     updateDB(key, data)
 
