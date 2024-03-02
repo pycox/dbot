@@ -1,11 +1,13 @@
 from threading import Thread
-from scripts.scraper1 import main as _1
-from scripts.scraper2 import main as _2
-from scripts.scraper3 import main as _3
-from scripts.scraper4 import main as _4
+import importlib
 from utils import updateDB
 
-num = 2
+num_threads = 4
+
+# f'scripts.scraper{i}' for i in range(1, 30) if i != 14  # Exclude scraper14
+scraper_modules = [
+    f'scripts.scraper{i}' for i in range(1, 30) 
+]
 
 def scraping(scraper, name):
     try:
@@ -14,30 +16,20 @@ def scraping(scraper, name):
         print(f'{name}: {e}')
 
 def run():
-    scrapers = [
-        (_1, 'Scraper1'), 
-        (_2, 'Scraper2'), 
-        (_3, 'Scraper3'), 
-        (_4, 'Scraper4')
-    ]
-    
-    threads = []
+    scrapers = [(importlib.import_module(module).main, module.split('.')[-1]) for module in scraper_modules]
 
-    for i in range(0, len(scrapers), num): 
-        for scraper, name in scrapers[i:i+num]:
+    for i in range(0, len(scrapers), num_threads):
+        threads = []
+        
+        for scraper, name in scrapers[i:i+num_threads]:
             thread = Thread(target=scraping, args=(scraper, name))
-            
             threads.append(thread)
-            
             thread.start()
 
-        for thread in threads: 
+        for thread in threads:
             thread.join()
-            
-        threads = [] 
-        
+
         updateDB()
 
 if __name__ == "__main__":
     run()
-    
