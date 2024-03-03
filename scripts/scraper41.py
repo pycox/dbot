@@ -20,7 +20,7 @@ def main():
             By.CSS_SELECTOR, "a.elementor-button"
         ).click()
     except Exception as e:
-        print(f"Scraper7 cookiee button: {e}")
+        print(f"Scraper{key} cookiee button: {e}")
 
     time.sleep(10)
 
