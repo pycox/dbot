@@ -6,19 +6,12 @@ import time
 
 
 def main():
-    key = 50
+    key = 51
     com, url = readUrl(key)
     options = Options()
     options.add_argument("--log-level=3")
     driver = webdriver.Chrome(options=options)
     driver.get(url)
-
-    # time.sleep(4)
-
-    # try:
-    #     driver.find_element(By.CSS_SELECTOR, 'button#cookie-accept').click()
-    # except Exception as e:
-    #     print(f'Scraper{key} cookiee button: {e}')
 
     time.sleep(4)
 
@@ -29,7 +22,10 @@ def main():
     for item in items:
         link = item.find_element(By.CSS_SELECTOR, "a").get_attribute("href").strip()
         title = item.find_element(By.CSS_SELECTOR, "a").text.strip()
-        location = item.find_elements(By.CSS_SELECTOR, "p")[1].text.strip()
+        location = (
+            item.find_elements(By.CSS_SELECTOR, "p")[0].text.strip()
+            + item.find_elements(By.CSS_SELECTOR, "p")[1].text.strip()
+        )
 
         for str in [
             "London",
