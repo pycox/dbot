@@ -1,1 +1,1 @@
-from .filter import readHistory, updateHistory, readUrl, updateDB
+from .filter import readHistory, updateHistory, readUrl, updateDB, filterUrls

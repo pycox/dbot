@@ -11,12 +11,36 @@ dbXlDir = r"./db/data.xlsx"
 cashData = {}
 
 
+def filterUrls():
+    wb = load_workbook(ctrXlDir)
+
+    ws = wb.active
+
+    urls = []
+
+    for row in ws.iter_rows(min_row=1):
+        if row[0].value != "ID" and row[0].value is not None:
+            if ws["D1"].value == "yes":
+                if row[3].value == "yes":
+                    urls.append(row[0].value)
+            else:
+                if row[3].value != "no":
+                    urls.append(row[0].value)
+
+    return list(set(urls))
+
+
 def readUrl(key):
     wb = load_workbook(ctrXlDir)
 
     ws = wb.active
 
-    return [ws[f"A{key + 1}"].value, ws[f"B{key + 1}"].value]
+    if isinstance(key, int) and ws[f"A{key + 1}"].value == key:
+        return [ws[f"B{key + 1}"].value, ws[f"C{key + 1}"].value]
+
+    for row in ws.iter_rows(min_row=1):
+        if str(row[0].value) == str(key):
+            return [row[1].value, row[2].value]
 
 
 def fetchJobs():
@@ -24,7 +48,7 @@ def fetchJobs():
 
     ws = wb.active
 
-    return [cell.value.lower() for cell in ws["D"] if cell.value is not None]
+    return [cell.value.lower() for cell in ws["E"] if cell.value is not None]
 
 
 def readHistory(key=None):
