@@ -40,17 +40,25 @@ def main():
 
     for item in items:
         link = item.find_element(By.CSS_SELECTOR, "a").get_attribute("href").strip()
-
-        data.append(
-            [
-                item.find_element(By.CSS_SELECTOR, "span.section-title").text.strip(),
-                com,
-                item.find_element(By.XPATH, ".//span[contains(text(), 'Location')]")
-                .find_element(By.XPATH, "./following-sibling::div")
-                .text.strip(),
-                link,
-            ]
+        location = (
+            item.find_element(By.XPATH, ".//span[contains(text(), 'Location')]")
+            .find_element(By.XPATH, "./following-sibling::div")
+            .text.strip()
         )
+
+        if location.split(",")[-1].strip() in ["GB", "US"]:
+            data.append(
+                [
+                    item.find_element(
+                        By.CSS_SELECTOR, "span.section-title"
+                    ).text.strip(),
+                    com,
+                    item.find_element(By.XPATH, ".//span[contains(text(), 'Location')]")
+                    .find_element(By.XPATH, "./following-sibling::div")
+                    .text.strip(),
+                    link,
+                ]
+            )
 
     driver.quit()
 
