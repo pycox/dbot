@@ -23,7 +23,6 @@ def main():
         link = item.find_element(By.CSS_SELECTOR, "a").get_attribute("href").strip()
         title = item.find_element(By.CSS_SELECTOR, "h4").text.strip()
         location = title.split("–")[-1].strip()
-        print(title)
 
         if location in ["Kendal", "USA"]:
 
