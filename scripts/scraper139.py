@@ -27,10 +27,12 @@ def main():
         try:
             time.sleep(4)
 
-            nextBtn = driver.find_elements(By.CSS_SELECTOR, "a.next")
+            # nextBtn = driver.find_elements(By.CSS_SELECTOR, "a.next")
 
             if len(driver.find_elements(By.CSS_SELECTOR, "a.oj-joblist-more")) > 0:
-                nextBtn[0].click()
+                element = driver.find_element(By.CSS_SELECTOR, "ul.dgt-list-items")
+                driver.execute_script("arguments[0].scrollTop = arguments[0].scrollHeight", element)
+                # nextBtn[0].click()
             else:
                 flag = False
         except:
@@ -53,7 +55,7 @@ def main():
                     link,
                 ]
             )
-            
+
     driver.quit()
 
     updateDB(key, data)
