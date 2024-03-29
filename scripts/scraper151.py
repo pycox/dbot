@@ -57,9 +57,6 @@ def main():
             ]
         )
 
-    print(data)
-    return
-
     driver.quit()
 
     updateDB(key, data)
