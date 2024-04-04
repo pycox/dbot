@@ -15,7 +15,6 @@ def main():
 
     time.sleep(4)
 
-
     items = driver.find_elements(By.CSS_SELECTOR, "ul#jobs_list_container > li.w-full")
 
     data = []
@@ -24,16 +23,18 @@ def main():
         link = item.find_element(By.CSS_SELECTOR, "a").get_attribute("href").strip()
         location = item.find_element(By.CSS_SELECTOR, 'a > div > span:last-child').text.strip()
         
-
-        data.append(
-            [
-                item.find_element(By.CSS_SELECTOR, "a > span").text.strip(),
-                com,
-                location,
-                link,
-            ]
-        )
-
+        for str in ['London', 'New York', 'San Francisco', 'United States', 'United Kingdom', 'UK', 'USA', 'US']:
+            if (str in location):
+                data.append(
+                    [
+                        item.find_element(By.CSS_SELECTOR, "a > span").text.strip(),
+                        com,
+                        location,
+                        link,
+                    ]
+                )
+                break
+              
     driver.quit()
 
     updateDB(key, data)
