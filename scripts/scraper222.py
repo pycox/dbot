@@ -13,7 +13,7 @@ def main():
     driver = webdriver.Chrome(options=options)
     driver.get(url)
 
-    time.sleep(4)
+    time.sleep(4) 
 
     addresses = driver.find_elements(By.CSS_SELECTOR, "div.comeet-g-r")
 
