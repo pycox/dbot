@@ -1,8 +1,8 @@
 from threading import Thread
 import importlib
-from utils import updateDB, filterUrls
+from utils import updateDB, filterUrls, getBotSpeed
 
-num_threads = 4
+num_threads = getBotSpeed()
 
 scraper_modules = [f"scripts.scraper{id}" for id in filterUrls()]
 

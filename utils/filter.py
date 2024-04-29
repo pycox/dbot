@@ -19,6 +19,22 @@ def ensure_history_file_exists():
             json.dump({}, file)
 
 
+def getBotSpeed():
+    try:
+        wb = load_workbook(ctrXlDir)
+        ws = wb.active
+        speed = ws["F2"].value
+
+        if isinstance(speed, (int, float)):
+            return int(speed)
+        else:
+            return 4
+    except FileNotFoundError:
+        return 4
+    except ValueError:
+        return 4
+
+
 def filterUrls():
     wb = load_workbook(ctrXlDir)
 
@@ -76,7 +92,7 @@ def readHistory(key=None):
 
 def updateHistory(key, val):
     ensure_history_file_exists()
-    
+
     data = readHistory()
     data[f"{key}"] = val
 
