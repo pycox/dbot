@@ -6,9 +6,17 @@ histDir = r"./controller/history.json"
 
 ctrXlDir = r"./controller/clients.xlsx"
 
-dbXlDir = r"./db/data.xlsx"
+dbXlDir = r"data.xlsx"
 
 cashData = {}
+
+cashData = {}
+
+
+def ensure_history_file_exists():
+    if not os.path.exists(histDir):
+        with open(histDir, "w") as file:
+            json.dump({}, file)
 
 
 def filterUrls():
@@ -52,6 +60,8 @@ def fetchJobs():
 
 
 def readHistory(key=None):
+    ensure_history_file_exists()
+
     with open(histDir, "r") as file:
         try:
             data = json.load(file)
@@ -65,6 +75,8 @@ def readHistory(key=None):
 
 
 def updateHistory(key, val):
+    ensure_history_file_exists()
+    
     data = readHistory()
     data[f"{key}"] = val
 
