@@ -147,3 +147,5 @@ dmypy.json
 data.xlsx
 
 /dev.py
+clients.xlsx
+history.json

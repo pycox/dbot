@@ -2,9 +2,9 @@ import json
 from openpyxl import load_workbook, Workbook
 import os
 
-histDir = r"./controller/history.json"
+histDir = r"history.json"
 
-ctrXlDir = r"./controller/clients.xlsx"
+ctrXlDir = r"clients.xlsx"
 
 dbXlDir = r"data.xlsx"
 
